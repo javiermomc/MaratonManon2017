@@ -13,7 +13,7 @@
 char name[16], password[16];
 int error=0;
 int passwordLen;
-int espChar;
+int espChar=0;
  
 void getPassword(){
 	char input;
@@ -60,7 +60,10 @@ int checkNum(){
 	int mayus=0;
 	for(int i=0; i<passwordLen; i++){
 		if(password[i]>=48&&password[i]<=57)mayus++;
-		else if	(password[i]<65&&password[i]>90)espChar++;
+		else if	(password[i]<65||password[i]>90){
+//			printf("%d", espChar);j
+			espChar++;
+		}
 	}
 //	printf("%d",mayus);getche();
 
@@ -75,10 +78,9 @@ main(){
 	int up=checkUpperCase();
 	int num = checkNum();
 	int nivel;
-//	printf("%d",espChar);
 	if(up==2||num==2||num==0||up==0)nivel=1;
 	if(up==1||(up==0&&num==1)||(up==1&&num==1))nivel=2;
-	if(up==1&&espChar>0||(up==0&&espChar>0)||num==1&&espChar>0)nivel=3;
+	if(espChar>0)nivel=3;
 	if(up==1&&num==1)nivel=4;
 	if(up==1&&num==1&&espChar>0)nivel=5;
 	
